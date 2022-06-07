@@ -2,7 +2,7 @@
 
 This Anchor suite has been developed as a showcase for the [Strategy Pattern](https://en.wikipedia.org/wiki/Strategy_pattern) where a `master` program is initialized with a `strategy` knowing nothing about it at the beginning and just reading values from it.
 
-During `master` initialization we need to specify a `stragey_state` account where the `master` during later `refresh` istructions will read the selected strategy outcomes.
+During `master` initialization we need to specify a `stragey_state` account where the `master` during later `refresh` instructions will read the selected strategy outcomes.
 
 ## Features
 
@@ -46,8 +46,8 @@ let strategy_state = StrategyState::try_deserialize_unchecked(&mut account_data_
 
 but the `StrategyState` account shouldn't be a master program child account.
 
-## Why not using a CPI inside master refresh istruction?
+## Why not using a CPI inside master refresh instruction?
 
-Considering the current Solana nested CPI calls limitations, as of now this limit is set to 4 nested calls, we decided to split the two istructions, calling directly the `use_strategy` istruction on the strategy and then the `refresh` istruction on the master. This way we can save one nested call.
+Considering the current Solana nested CPI calls limitations, as of now this limit is set to 4 nested calls, we decided to split the two instructions, calling directly the `use_strategy` instruction on the strategy and then the `refresh` instruction on the master. This way we can save one nested call.
 
 This approach can lead to the risk of using stale data in the refresh ix, for example if the client forgot to call `use_strategy`. Depending on the product context this can be something to avoid: introducing the `refreshed_slot` in the `StrategyState` can be used to check if the current state is stale and for example rejecting the `master` `refresh` call.
