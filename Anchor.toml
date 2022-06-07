@@ -1,0 +1,17 @@
+[features]
+seeds = false
+
+[programs.localnet]
+master = "26Spr9AsbeLdhrjbmVZA9N4L3XFfV2zzdKFesRahLtEE"
+strategy_a = "CybMwHZ9Wp7xFY244bFLYtJrV665LcYMPWMAEA8DuoXW"
+strategy_b = "9zNguHtdifqfEVhCH1FSURnUUuheq5uu8MtyGGGi8SQY"
+
+[registry]
+url = "https://anchor.projectserum.com"
+
+[provider]
+cluster = "localnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
